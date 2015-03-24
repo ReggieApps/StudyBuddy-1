@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">StudyBuddy</string>
+    <string name="action_settings">Settings</string>
+    <string name="prompt">Pick a class</string>
+
+    <string-array name="class_array">
+        <item>Math</item>
+        <item>English</item>
+        <item>Science</item>
+        <item>History</item>
+        <item>Foreign Language</item>
+        <item>Information Technology</item>
+        <item>Business</item>
+        <item>Education</item>
+    </string-array>
+
+</resources>
