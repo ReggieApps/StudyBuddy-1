@@ -12,9 +12,9 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Intent intent = new Intent(FromActivity.this, ToActivity.class);
-        startActivity(intent);
+        setContentView(R.layout.fragment_create_event);
+       // Intent intent = new Intent(this,);
+        //startActivity(intent);
     }
 
 
