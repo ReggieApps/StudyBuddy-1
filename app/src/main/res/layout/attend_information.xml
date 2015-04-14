@@ -1,0 +1,72 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context=".AttendInformation">
+
+    <TextView
+        android:text="@string/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/title"
+        android:textSize="@dimen/abc_text_size_display_2_material"
+        android:textColor="#ffff0900"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="@string/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/time"
+        android:layout_below="@+id/title"
+        android:textSize="35sp" />
+
+    <Button
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="@string/attend_button"
+        android:textSize="35sp"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/attend_button"
+        android:layout_centerHorizontal="true"></Button>
+
+    <TextView
+        android:text="@string/place"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/place"
+        android:layout_below="@+id/time"
+        android:textSize="35sp" />
+
+    <TextView
+        android:text="@string/group_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/group_size"
+        android:layout_below="@+id/place"
+        android:textSize="35sp" />
+
+    <TextView
+        android:text="@string/people_attending"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/people_attending"
+        android:layout_below="@+id/group_size"
+        android:textSize="35sp"
+        android:clickable="false" />
+
+    <TextView
+        android:text="@string/description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/description"
+        android:layout_below="@+id/people_attending"
+        android:textSize="35sp" />
+
+
+</RelativeLayout>
