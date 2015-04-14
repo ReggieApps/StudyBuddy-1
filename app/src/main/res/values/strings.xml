@@ -16,4 +16,14 @@
         <item>Education</item>
     </string-array>
 
+    <string name="title">Butt</string>
+    <string name="time">Time:</string>
+    <string name="place">Place:</string>
+    <string name="description">Description:</string>
+    <string name="group_size">Group Size:</string>
+    <string name="people_attending">People Attending:</string>
+    <string name="attend_button">Attend</string>
+    <string name="attend_page">Attend Page Test</string>
+
+
 </resources>
