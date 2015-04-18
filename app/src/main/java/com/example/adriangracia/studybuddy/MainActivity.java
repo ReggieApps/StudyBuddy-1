@@ -8,8 +8,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -24,18 +26,22 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
+        String[] list = {"this", "is", "a", "test"};
+       final ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1, list);
 
         ListView test = (ListView) findViewById(R.id.listView);
+        test.setAdapter(adapter);
+
+
         test.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
                 Intent in = new Intent(MainActivity.this, AttendInformation.class);
+          //      Toast.makeText(getApplicationContext(), "why do i fail " + position, Toast.LENGTH_LONG).show();
 
-                String[] testInformation = {};
+                String[] testInformation = {"This", "Is", "Also", "a", "test"};
                 in.putExtra(information ,testInformation);
-                startActivity(in);
+               startActivity(in);
             }
         });
 
