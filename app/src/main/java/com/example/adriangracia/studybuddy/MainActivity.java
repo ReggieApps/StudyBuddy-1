@@ -3,11 +3,21 @@ package com.example.adriangracia.studybuddy;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.internal.widget.AdapterViewCompat;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ListView;
+
+import java.util.List;
 
 
 public class MainActivity extends ActionBarActivity {
+
+    final public String information = "information";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,6 +25,19 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
 
+
+
+        ListView test = (ListView) findViewById(R.id.listView);
+        test.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent in = new Intent(MainActivity.this, AttendInformation.class);
+
+                String[] testInformation = {};
+                in.putExtra(information ,testInformation);
+                startActivity(in);
+            }
+        });
 
     }
 
