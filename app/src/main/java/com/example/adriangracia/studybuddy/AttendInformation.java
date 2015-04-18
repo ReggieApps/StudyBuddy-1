@@ -17,7 +17,7 @@ public class AttendInformation extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.attend_information);
-//
+//test git
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             String[] value = extras.getStringArray("information");
