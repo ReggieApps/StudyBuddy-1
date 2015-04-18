@@ -13,10 +13,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/title"
-        android:textSize="@dimen/abc_text_size_display_2_material"
+        android:textSize="30sp"
         android:textColor="#ffff0900"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold" />
 
     <TextView
         android:text="@string/time"
@@ -24,49 +25,98 @@
         android:layout_height="wrap_content"
         android:id="@+id/time"
         android:layout_below="@+id/title"
-        android:textSize="35sp" />
+        android:textSize="25sp"
+        android:textIsSelectable="false"
+        android:textStyle="bold" />
 
     <Button
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:text="@string/attend_button"
-        android:textSize="35sp"
+        android:textSize="25sp"
         android:layout_alignParentBottom="true"
         android:id="@+id/attend_button"
-        android:layout_centerHorizontal="true"></Button>
+        android:layout_centerHorizontal="true"
+        android:textStyle="normal"
+        android:capitalize="none"></Button>
 
     <TextView
         android:text="@string/place"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/place"
-        android:layout_below="@+id/time"
-        android:textSize="35sp" />
+        android:layout_below="@id/time"
+        android:textSize="25sp"
+        android:textStyle="bold" />
 
     <TextView
         android:text="@string/group_size"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/group_size"
-        android:layout_below="@+id/place"
-        android:textSize="35sp" />
+        android:layout_below="@id/place"
+        android:textSize="25sp"
+        android:textStyle="bold" />
 
     <TextView
         android:text="@string/people_attending"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/people_attending"
-        android:layout_below="@+id/group_size"
-        android:textSize="35sp"
-        android:clickable="false" />
+        android:textSize="25sp"
+        android:clickable="false"
+        android:textStyle="bold"
+        android:layout_below="@id/group_size"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:text="@string/description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/description"
-        android:layout_below="@+id/people_attending"
-        android:textSize="35sp" />
+        android:layout_below="@id/people_attending"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTime"
+        android:layout_alignBaseline="@id/time"
+        android:layout_toEndOf="@id/time"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editPlace"
+        android:layout_alignBaseline="@id/place"
+        android:layout_toEndOf="@id/place"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editGroup_size"
+        android:layout_alignBaseline="@id/group_size"
+        android:layout_toEndOf="@id/group_size"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editPeople_attending"
+        android:layout_alignBaseline="@id/people_attending"
+        android:layout_toEndOf="@id/people_attending"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editDescription"
+        android:layout_alignBaseline="@id/description"
+        android:layout_toEndOf="@id/description"
+        android:textSize="15sp" />
 
 
 </RelativeLayout>
