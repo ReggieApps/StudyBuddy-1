@@ -23,11 +23,11 @@ public class AttendInformation extends ActionBarActivity {
             String[] value = extras.getStringArray("information");
 
 
-            TextView timeAppend = (TextView)findViewById(R.id.time);
-            TextView placeAppend = (TextView)findViewById(R.id.place);
-            TextView sizeAppend = (TextView)findViewById(R.id.group_size);
-            TextView peopleAttendingAppend = (TextView)findViewById(R.id.people_attending);
-            TextView descriptionAppend = (TextView)findViewById(R.id.description);
+            TextView timeAppend = (TextView)findViewById(R.id.editTime);
+            TextView placeAppend = (TextView)findViewById(R.id.editPlace);
+            TextView sizeAppend = (TextView)findViewById(R.id.editGroup_size);
+            TextView peopleAttendingAppend = (TextView)findViewById(R.id.editPeople_attending);
+            TextView descriptionAppend = (TextView)findViewById(R.id.editDescription);
             timeAppend.append("  " + value[0]);
             placeAppend.append("  " + value[1]);
             sizeAppend.append("  " + value[2]);
