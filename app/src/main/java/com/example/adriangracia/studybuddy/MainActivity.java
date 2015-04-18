@@ -37,10 +37,10 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
                 Intent in = new Intent(MainActivity.this, AttendInformation.class);
-          //      Toast.makeText(getApplicationContext(), "why do i fail " + position, Toast.LENGTH_LONG).show();
+          //    Toast.makeText(getApplicationContext(), "why do i fail " + position, Toast.LENGTH_LONG).show();
 
-                String[] testInformation = {"This", "Is", "Also", "a", "test"};
-                in.putExtra(information ,testInformation);
+               String[] testInformation = {"This", "Is", "Also", "a", "test"};
+               in.putExtra(information ,testInformation);
                startActivity(in);
             }
         });
