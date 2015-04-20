@@ -1,6 +1,8 @@
 package com.example.adriangracia.studybuddy;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,13 +13,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-public class AttendInformation extends ActionBarActivity {
+public class AttendInformation extends Activity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.attend_information);
-//test git
+
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             String[] value = extras.getStringArray("information");

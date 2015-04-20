@@ -12,35 +12,20 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.adriangracia.studybuddy.fragment.*;
+
 
 public class MainActivity extends ActionBarActivity {
 
-    final public String information = "information";
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.single_fragment_container);
+        getSupportFragmentManager().beginTransaction().add(R.id.frame_layout_fragment_container, new mainActivityFragment()).commit();
 
-        String[] list = {"this", "is", "a", "test"};
-       final ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1, list);
-
-        ListView test = (ListView) findViewById(R.id.listView);
-        test.setAdapter(adapter);
-
-
-        test.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
-                Intent in = new Intent(MainActivity.this, AttendInformation.class);
-          //    Toast.makeText(getApplicationContext(), "why do i fail " + position, Toast.LENGTH_LONG).show();
-
-               String[] testInformation = {"This", "Is", "Also", "a", "test"};
-               in.putExtra(information ,testInformation);
-               startActivity(in);
-            }
-        });
 
     }
 
