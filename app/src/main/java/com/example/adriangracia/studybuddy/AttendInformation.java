@@ -16,20 +16,9 @@ import com.example.adriangracia.studybuddy.fragment.attendInformationFragment;
 import com.example.adriangracia.studybuddy.fragment.mainActivityFragment;
 
 
-public class AttendInformation extends ActionBarActivity {
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
+public class AttendInformation extends singleFragmentActivity {
 
 
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.single_fragment_container);
-
-        getSupportFragmentManager().beginTransaction().add(R.id.frame_layout_fragment_container, new attendInformationFragment()).commit();
-
-
-
-    }
 
 
     @Override
@@ -52,5 +41,10 @@ public class AttendInformation extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public Fragment getFragment() {
+        return new attendInformationFragment();
     }
 }

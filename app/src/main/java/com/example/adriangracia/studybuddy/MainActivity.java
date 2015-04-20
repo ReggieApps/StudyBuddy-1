@@ -1,6 +1,7 @@
 package com.example.adriangracia.studybuddy;
 
 import android.content.Intent;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,19 +16,9 @@ import android.widget.Toast;
 import com.example.adriangracia.studybuddy.fragment.*;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends singleFragmentActivity {
 
 
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.single_fragment_container);
-        getSupportFragmentManager().beginTransaction().add(R.id.frame_layout_fragment_container, new mainActivityFragment()).commit();
-
-
-    }
 
 
     @Override
@@ -50,5 +41,10 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public Fragment getFragment() {
+        return new mainActivityFragment();
     }
 }
