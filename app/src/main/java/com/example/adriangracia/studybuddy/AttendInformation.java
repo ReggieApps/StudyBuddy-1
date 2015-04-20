@@ -12,45 +12,20 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.adriangracia.studybuddy.fragment.attendInformationFragment;
+import com.example.adriangracia.studybuddy.fragment.mainActivityFragment;
 
-public class AttendInformation extends Activity {
+
+public class AttendInformation extends ActionBarActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.attend_information);
+        setContentView(R.layout.single_fragment_container);
 
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            String[] value = extras.getStringArray("information");
-
-
-            TextView timeAppend = (TextView)findViewById(R.id.editTime);
-            TextView placeAppend = (TextView)findViewById(R.id.editPlace);
-            TextView sizeAppend = (TextView)findViewById(R.id.editGroup_size);
-            TextView peopleAttendingAppend = (TextView)findViewById(R.id.editPeople_attending);
-            TextView descriptionAppend = (TextView)findViewById(R.id.editDescription);
-            timeAppend.append("  " + value[0]);
-            placeAppend.append("  " + value[1]);
-            sizeAppend.append("  " + value[2]);
-            peopleAttendingAppend.append("  " + value[3]);
-            descriptionAppend.append("  " + value[4]);
-
-
-
-        }
-
-        Button finalizeAttend = (Button) findViewById(R.id.attend_button);
-        finalizeAttend.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Toast toast = Toast.makeText(getApplicationContext(), "Attend button pressed.", Toast.LENGTH_SHORT);
-                toast.show();
-            }
-        });
-
-
+        getSupportFragmentManager().beginTransaction().add(R.id.frame_layout_fragment_container, new attendInformationFragment()).commit();
 
 
 
