@@ -18,7 +18,7 @@ import com.example.adriangracia.studybuddy.R;
 public class attendInformationFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.activity_main, container, false);
+        View v = inflater.inflate(R.layout.attend_information, container, false);
 
         Bundle extras = getActivity().getIntent().getExtras();
         if (extras != null) {
