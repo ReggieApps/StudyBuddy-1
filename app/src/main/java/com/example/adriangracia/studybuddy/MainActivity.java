@@ -1,10 +1,12 @@
-package com.example.adriangracia.studybuddy;
+package com.example.adriangracia.studybuddy.Activities;
 
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.example.adriangracia.studybuddy.R;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -15,6 +17,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.fragment_create_event);
        // Intent intent = new Intent(this,);
         //startActivity(intent);
+
     }
 
 
