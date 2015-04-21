@@ -40,6 +40,7 @@ public class MainActivity extends singleFragmentActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    //pizza hotdog
     @Override
     public Fragment getFragment() {
         return new mainActivityFragment();
