@@ -1,5 +1,6 @@
 package com.example.adriangracia.studybuddy.dialogs;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -15,14 +16,14 @@ import android.view.ViewGroup;
 import android.widget.TimePicker;
 
 import com.example.adriangracia.studybuddy.*;
+import com.example.adriangracia.studybuddy.objects.TimeObject;
 
 /**
  * Created by jonathanmitchell on 4/20/15.
  */
 public class TimePickerDialogFragment extends DialogFragment implements DialogInterface.OnClickListener{
 
-    public static final String HOUR_ID = "HOUR_ID_";
-    public static final String MIN_ID = "MIN_ID";
+    public static final String TIME_OBJ = "_TIME_OBJ_";
 
     private static final String TAG = "TimePickDFrag";
 
@@ -57,10 +58,13 @@ public class TimePickerDialogFragment extends DialogFragment implements DialogIn
 
                 Intent intent = new Intent();
 
-                intent.putExtra(HOUR_ID,hour);
-                intent.putExtra(MIN_ID,min);
 
-                Log.i(TAG,"Hour: "+hour+", Min: "+min);
+
+                TimeObject to = new TimeObject(hour,min);
+
+                intent.putExtra(TIME_OBJ,to);
+
+                getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK,intent);
 
                 dialogInterface.dismiss();
 
