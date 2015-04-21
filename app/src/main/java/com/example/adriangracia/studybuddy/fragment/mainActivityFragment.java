@@ -9,7 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.adriangracia.studybuddy.*;
 
@@ -42,6 +44,18 @@ public class mainActivityFragment extends Fragment {
             }
         });
 
-        return v;
+        Button createEventButton = (Button) v.findViewById(R.id.Button2);
+
+        createEventButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+            Intent in = new Intent(getActivity(), createEvent.class);
+
+            startActivity(in);
+        }});
+
+
+
+       return v;
     }
 }
