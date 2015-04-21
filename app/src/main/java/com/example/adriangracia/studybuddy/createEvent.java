@@ -12,14 +12,6 @@ import com.example.adriangracia.studybuddy.fragment.createEventFragment;
 public class createEvent extends singleFragmentActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-
-
-    }
-
-    @Override
     public Fragment getFragment() {
         return new createEventFragment();
     }
