@@ -11,8 +11,8 @@ public abstract class singleFragmentActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.single_fragment_container);
+
         Fragment aFrag = getSupportFragmentManager().findFragmentById(R.id.frame_layout_fragment_container);
 
         if(aFrag == null) {
