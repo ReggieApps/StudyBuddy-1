@@ -18,9 +18,6 @@ import com.example.adriangracia.studybuddy.fragment.*;
 
 public class MainActivity extends singleFragmentActivity {
 
-
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
