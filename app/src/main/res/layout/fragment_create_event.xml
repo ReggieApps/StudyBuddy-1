@@ -28,6 +28,7 @@
             android:layout_height="wrap_content" />
 
             <EditText
+                android:id="@+id/edit_text_create_event_title"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content" />
@@ -51,6 +52,7 @@
                 android:layout_height="wrap_content" />
 
             <EditText
+                android:id="@+id/edit_text_create_event_place"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content" />
@@ -58,6 +60,7 @@
 
         <LinearLayout
             android:layout_margin="8dp"
+            android:gravity="center"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -69,8 +72,13 @@
                 android:gravity="center"
                 android:textSize="18sp"
                 android:text="Time:"
-                android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/button_create_pick_time"
+                android:text="Pick Time!"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
 
@@ -80,6 +88,7 @@
 
         <LinearLayout
             android:layout_margin="8dp"
+            android:gravity="center"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -91,19 +100,13 @@
                 android:gravity="center"
                 android:textSize="18sp"
                 android:text="Duration:"
-                android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-
-
-            <!--    <Spinner
-                   android:id="@+id/spinner_1"
-
-                   android:layout_weight="1"
-                  android:entries="@array/array_hours"
-                android:layout_width="0dp"
-                android:layout_height="match_parent">
-            </Spinner>-->
+            <Button
+                android:id="@+id/button_create_pick_duration"
+                android:text="Choose Duration!"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
         </LinearLayout>
 
         <TextView
@@ -119,6 +122,7 @@
             android:layout_weight="1"
             />
         <EditText
+            android:id="@+id/edit_text_create_event_description"
             android:layout_margin="12dp"
             android:layout_gravity="center_horizontal"
             android:layout_weight="5"
