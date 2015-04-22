@@ -167,6 +167,7 @@
 
     <Button
         android:text="Create!"
+        android:id="@+id/create_event_finalize"
         android:textSize="21sp"
         android:layout_margin="8dp"
         android:layout_width="match_parent"

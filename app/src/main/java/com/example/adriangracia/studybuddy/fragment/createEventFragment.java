@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.adriangracia.studybuddy.MainActivity;
 import com.example.adriangracia.studybuddy.R;
 import com.example.adriangracia.studybuddy.dialogs.ChooseDurationDialogFragment;
 import com.example.adriangracia.studybuddy.dialogs.TimePickerDialogFragment;
@@ -38,6 +39,7 @@ public class createEventFragment extends Fragment implements View.OnClickListene
 
     private Button pickTime;
     private Button chooseDuration;
+    private Button createEvent;
 
     private EditText title;
     private EditText place;
@@ -63,6 +65,23 @@ public class createEventFragment extends Fragment implements View.OnClickListene
                 dur.setTargetFragment(createEventFragment.this,DURATION_REQUEST_CODE);
                 dur.show(getActivity().getSupportFragmentManager(),TAG);
                 break;
+            case R.id.create_event_finalize:
+                if(title==null) Toast.makeText(getActivity(),"Please enter a title.", Toast.LENGTH_LONG);
+                else if(place==null) Toast.makeText(getActivity(),"Please specify a location.", Toast.LENGTH_LONG);
+                else if(to==null) Toast.makeText(getActivity(),"Please specify a time.", Toast.LENGTH_LONG);
+                else{
+                    Intent i = new Intent(getActivity(), MainActivity.class);
+
+                    Bundle bun = new Bundle();
+                    bun.putString("TITLE", title.getText().toString());
+                    bun.putString("PLACE", place.getText().toString());
+                    bun.putString("TIME", to.toString());
+
+                   i.putExtra("EVENT_BUNDLE", bun);
+
+
+                }
+                break;
             default:
                 break;
         }
@@ -76,6 +95,9 @@ public class createEventFragment extends Fragment implements View.OnClickListene
 
         chooseDuration = (Button)v.findViewById(R.id.button_create_pick_duration);
         chooseDuration.setOnClickListener(this);
+
+        createEvent = (Button) v.findViewById(R.id.create_event_finalize);
+        createEvent.setOnClickListener(this);
 
         title = (EditText)v.findViewById(R.id.edit_text_create_event_title);
 
