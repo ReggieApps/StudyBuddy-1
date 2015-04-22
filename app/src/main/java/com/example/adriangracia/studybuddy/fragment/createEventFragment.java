@@ -66,9 +66,9 @@ public class createEventFragment extends Fragment implements View.OnClickListene
                 dur.show(getActivity().getSupportFragmentManager(),TAG);
                 break;
             case R.id.create_event_finalize:
-                if(title==null) Toast.makeText(getActivity(),"Please enter a title.", Toast.LENGTH_LONG);
-                else if(place==null) Toast.makeText(getActivity(),"Please specify a location.", Toast.LENGTH_LONG);
-                else if(to==null) Toast.makeText(getActivity(),"Please specify a time.", Toast.LENGTH_LONG);
+                if(title.getText().length()==0) Toast.makeText(getActivity(),"Please enter a title.", Toast.LENGTH_LONG).show();
+                else if(place.getText().length()==0) Toast.makeText(getActivity(),"Please specify a location.", Toast.LENGTH_LONG).show();
+                else if(to==null) Toast.makeText(getActivity(),"Please specify a time.", Toast.LENGTH_LONG).show();
                 else{
                     Intent i = new Intent(getActivity(), MainActivity.class);
 
@@ -77,8 +77,8 @@ public class createEventFragment extends Fragment implements View.OnClickListene
                     bun.putString("PLACE", place.getText().toString());
                     bun.putString("TIME", to.toString());
 
-                   i.putExtra("EVENT_BUNDLE", bun);
-
+                    i.putExtra("EVENT_BUNDLE", bun);
+                    startActivity(i);
 
                 }
                 break;

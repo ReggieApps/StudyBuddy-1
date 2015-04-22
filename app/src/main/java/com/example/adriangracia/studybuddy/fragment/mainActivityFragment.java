@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 import com.example.adriangracia.studybuddy.*;
 
+import java.util.ArrayList;
+
 /**
  * Created by rgpaul on 4/20/2015.
  */
@@ -25,7 +27,13 @@ public class mainActivityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_main, container, false);
 
-        String[] list = {"this", "is", "a", "test"};
+        Bundle extras = getActivity().getIntent().getExtras();
+        ArrayList<String> list = new ArrayList();
+        if(extras!=null) {
+            list.add(extras.getString("TITLE"));
+        }
+
+
         final ArrayAdapter adapter = new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1, list);
 
         ListView test = (ListView) v.findViewById(R.id.listView);
