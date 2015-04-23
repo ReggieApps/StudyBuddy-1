@@ -73,7 +73,7 @@ public class createEventFragment extends Fragment implements View.OnClickListene
                 else if(to==null) Toast.makeText(getActivity(),"Please specify a time.", Toast.LENGTH_LONG).show();
                 else{
 
-                    evenObj = new EventObject(title.getText().toString(), place.getText().toString(), description.getText().toString());
+                    evenObj = new EventObject(title.getText().toString(), place.getText().toString(), description.getText().toString(), to);
                     Intent i = new Intent(getActivity(), MainActivity.class);
 
                     Bundle evenBun = new Bundle();

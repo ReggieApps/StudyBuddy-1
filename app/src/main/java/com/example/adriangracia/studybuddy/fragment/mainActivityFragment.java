@@ -33,7 +33,7 @@ public class mainActivityFragment extends Fragment {
         ArrayList<String> list = new ArrayList();
         if(getActivity().getIntent().getSerializableExtra("EVENT")!=null) {
             EventObject newObj = (EventObject) getActivity().getIntent().getSerializableExtra("EVENT");
-            Toast.makeText(getActivity(), newObj.getLocation(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), newObj.getTo().toString(), Toast.LENGTH_SHORT).show();
             list.add(newObj.getTitle());
         }
 
@@ -48,7 +48,6 @@ public class mainActivityFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
                 Intent in = new Intent(getActivity(), AttendInformation.class);
-                //    Toast.makeText(getApplicationContext(), "why do i fail " + position, Toast.LENGTH_LONG).show();
 
                 String[] testInformation = {"This", "Is", "Also", "a", "test"};
                 in.putExtra(information ,testInformation);
