@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.adriangracia.studybuddy.MainActivity;
 import com.example.adriangracia.studybuddy.R;
 import com.example.adriangracia.studybuddy.dialogs.ChooseDurationDialogFragment;
 import com.example.adriangracia.studybuddy.dialogs.TimePickerDialogFragment;
@@ -38,6 +39,7 @@ public class createEventFragment extends Fragment implements View.OnClickListene
 
     private Button pickTime;
     private Button chooseDuration;
+    private Button createEvent;
 
     private EditText title;
     private EditText place;
@@ -63,6 +65,20 @@ public class createEventFragment extends Fragment implements View.OnClickListene
                 dur.setTargetFragment(createEventFragment.this,DURATION_REQUEST_CODE);
                 dur.show(getActivity().getSupportFragmentManager(),TAG);
                 break;
+            case R.id.create_event_finalize:
+                if(title.getText().length()==0) Toast.makeText(getActivity(),"Please enter a title.", Toast.LENGTH_LONG).show();
+                else if(place.getText().length()==0) Toast.makeText(getActivity(),"Please specify a location.", Toast.LENGTH_LONG).show();
+                else if(to==null) Toast.makeText(getActivity(),"Please specify a time.", Toast.LENGTH_LONG).show();
+                else{
+                    Intent i = new Intent(getActivity(), MainActivity.class);
+
+                    i.putExtra("TITLE", title.getText().toString());
+                    i.putExtra("PLACE", place.getText().toString());
+                    i.putExtra("TIME_OBJ", to);
+                    startActivity(i);
+
+                }
+                break;
             default:
                 break;
         }
@@ -71,15 +87,20 @@ public class createEventFragment extends Fragment implements View.OnClickListene
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_create_event, container, false);
 
+        title = (EditText)v.findViewById(R.id.edit_text_create_event_title);
+
+        place = (EditText)v.findViewById(R.id.edit_text_create_event_place);
+
         pickTime = (Button)v.findViewById(R.id.button_create_pick_time);
         pickTime.setOnClickListener(this);
 
         chooseDuration = (Button)v.findViewById(R.id.button_create_pick_duration);
         chooseDuration.setOnClickListener(this);
 
-        title = (EditText)v.findViewById(R.id.edit_text_create_event_title);
+        createEvent = (Button) v.findViewById(R.id.create_event_finalize);
+        createEvent.setOnClickListener(this);
 
-        place = (EditText)v.findViewById(R.id.edit_text_create_event_place);
+
 
         description = (EditText)v.findViewById(R.id.edit_text_create_event_description);
 

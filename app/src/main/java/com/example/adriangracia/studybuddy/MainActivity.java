@@ -26,7 +26,7 @@ public class MainActivity extends singleFragmentActivity {
 
         //Add a comment
 
-
+//
         //Second comment
         return true;
     }
