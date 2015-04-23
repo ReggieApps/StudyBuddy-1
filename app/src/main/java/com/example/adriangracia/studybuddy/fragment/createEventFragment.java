@@ -93,7 +93,7 @@ public class createEventFragment extends Fragment implements View.OnClickListene
 
         description = (EditText)v.findViewById(R.id.edit_text_create_event_description);
 
-        evenObj = new EventObject(title.getText().toString(), place.getText().toString(), description.getText().toString(), to);
+        evenObj = new EventObject(title.getText().toString(), place.getText().toString(), description.getText().toString());
 
         pickTime = (Button)v.findViewById(R.id.button_create_pick_time);
         pickTime.setOnClickListener(this);
