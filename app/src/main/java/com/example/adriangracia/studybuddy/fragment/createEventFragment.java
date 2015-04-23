@@ -72,12 +72,9 @@ public class createEventFragment extends Fragment implements View.OnClickListene
                 else{
                     Intent i = new Intent(getActivity(), MainActivity.class);
 
-                    Bundle bun = new Bundle();
-                    bun.putString("TITLE", title.getText().toString());
-                    bun.putString("PLACE", place.getText().toString());
-                    bun.putString("TIME", to.toString());
-
-                    i.putExtra("EVENT_BUNDLE", bun);
+                    i.putExtra("TITLE", title.getText().toString());
+                    i.putExtra("PLACE", place.getText().toString());
+                    i.putExtra("TIME_OBJ", to);
                     startActivity(i);
 
                 }
@@ -90,6 +87,10 @@ public class createEventFragment extends Fragment implements View.OnClickListene
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_create_event, container, false);
 
+        title = (EditText)v.findViewById(R.id.edit_text_create_event_title);
+
+        place = (EditText)v.findViewById(R.id.edit_text_create_event_place);
+
         pickTime = (Button)v.findViewById(R.id.button_create_pick_time);
         pickTime.setOnClickListener(this);
 
@@ -99,9 +100,7 @@ public class createEventFragment extends Fragment implements View.OnClickListene
         createEvent = (Button) v.findViewById(R.id.create_event_finalize);
         createEvent.setOnClickListener(this);
 
-        title = (EditText)v.findViewById(R.id.edit_text_create_event_title);
 
-        place = (EditText)v.findViewById(R.id.edit_text_create_event_place);
 
         description = (EditText)v.findViewById(R.id.edit_text_create_event_description);
 

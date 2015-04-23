@@ -11,9 +11,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 
-import com.example.adriangracia.studybuddy.*;
+import com.example.adriangracia.studybuddy.AttendInformation;
+import com.example.adriangracia.studybuddy.R;
+import com.example.adriangracia.studybuddy.createEvent;
 
 import java.util.ArrayList;
 
