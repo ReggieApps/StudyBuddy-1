@@ -28,12 +28,14 @@ public class attendInformationFragment extends Fragment {
             TextView timeAppend = (TextView)v.findViewById(R.id.editTime);
             TextView placeAppend = (TextView)v.findViewById(R.id.editPlace);
             TextView titleAppend = (TextView)v.findViewById(R.id.title);
-            TextView peopleAttendingAppend = (TextView)v.findViewById(R.id.editPeople_attending);
+            TextView durationAppend = (TextView)v.findViewById(R.id.editDuration);
             TextView descriptionAppend = (TextView)v.findViewById(R.id.editDescription);
+            TextView subjectAppend = (TextView) v.findViewById(R.id.editSubject);
             timeAppend.append("  " + value[0]);
             placeAppend.append("  " + value[1]);
             titleAppend.append("  " + value[2]);
-            peopleAttendingAppend.append("  " + value[3]);
+            durationAppend.append("  " + value[3]);
+            subjectAppend.append(" " + value[5]);
             descriptionAppend.append("  " + value[4]);
 
 

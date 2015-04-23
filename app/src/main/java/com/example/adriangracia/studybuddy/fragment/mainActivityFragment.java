@@ -52,7 +52,7 @@ public class mainActivityFragment extends Fragment {
 
                 EventObject clickedEvent = eventList.get(position);
 
-                String[] testInformation = {clickedEvent.getTo().toString(), clickedEvent.getLocation(), clickedEvent.getTitle(), "nothing yet", clickedEvent.getDescription()};
+                String[] testInformation = {clickedEvent.getTo().toString(), clickedEvent.getLocation(), clickedEvent.getTitle(),clickedEvent.getDurationString(), clickedEvent.getDescription(), clickedEvent.getSubject()};
                 in.putExtra(information ,testInformation);
                 startActivity(in);
             }

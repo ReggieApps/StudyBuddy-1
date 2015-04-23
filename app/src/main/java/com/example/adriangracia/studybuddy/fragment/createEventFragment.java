@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.adriangracia.studybuddy.MainActivity;
@@ -43,6 +44,8 @@ public class createEventFragment extends Fragment implements View.OnClickListene
     private Button chooseDuration;
     private Button createEvent;
 
+    private Spinner subjectSpinner;
+
     private EditText title;
     private EditText place;
     private EditText description;
@@ -71,9 +74,10 @@ public class createEventFragment extends Fragment implements View.OnClickListene
                 if(title.getText().length()==0) Toast.makeText(getActivity(),"Please enter a title.", Toast.LENGTH_LONG).show();
                 else if(place.getText().length()==0) Toast.makeText(getActivity(),"Please specify a location.", Toast.LENGTH_LONG).show();
                 else if(to==null) Toast.makeText(getActivity(),"Please specify a time.", Toast.LENGTH_LONG).show();
+                else if(duration==-1) Toast.makeText(getActivity(),"Please specify a duration.", Toast.LENGTH_LONG).show();
                 else{
 
-                    evenObj = new EventObject(title.getText().toString(), place.getText().toString(), description.getText().toString(), to);
+                    evenObj = new EventObject(title.getText().toString(), place.getText().toString(), description.getText().toString(), subjectSpinner.getSelectedItem().toString(), duration, to);
                     Intent i = new Intent(getActivity(), MainActivity.class);
 
                     Bundle evenBun = new Bundle();
@@ -105,6 +109,8 @@ public class createEventFragment extends Fragment implements View.OnClickListene
 
         createEvent = (Button) v.findViewById(R.id.create_event_finalize);
         createEvent.setOnClickListener(this);
+
+        subjectSpinner = (Spinner) v.findViewById(R.id.spinner_2);
 
         dealWithSavedState(savedInstanceState);
 

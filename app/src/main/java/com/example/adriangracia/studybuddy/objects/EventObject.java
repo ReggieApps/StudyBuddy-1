@@ -10,12 +10,16 @@ public class EventObject implements Serializable{
     String title;
     String location;
     String description;
+    String subject;
+    int duration;
     TimeObject to;
 
-    public EventObject(String title, String location, String description, TimeObject to){
+    public EventObject(String title, String location, String description, String subject, int duration, TimeObject to){
         this.title=title;
         this.location=location;
         this.description=description;
+        this.subject=subject;
+        this.duration=duration;
         this.to=to;
     }
 
@@ -50,5 +54,27 @@ public class EventObject implements Serializable{
 
     public void setTo(TimeObject to) {
         this.to = to;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
+    public String getDurationString(){
+        String str ="";
+        str+=duration + " hours";
+        return str;
     }
 }
