@@ -11,10 +11,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.adriangracia.studybuddy.AttendInformation;
 import com.example.adriangracia.studybuddy.R;
 import com.example.adriangracia.studybuddy.createEvent;
+import com.example.adriangracia.studybuddy.objects.EventObject;
 
 import java.util.ArrayList;
 
@@ -31,7 +33,9 @@ public class mainActivityFragment extends Fragment {
         Bundle extras = getActivity().getIntent().getExtras();
         ArrayList<String> list = new ArrayList();
         if(extras!=null) {
-            list.add(extras.getString("TITLE"));
+            EventObject newObj = (EventObject) extras.getSerializable("EVENT");
+            Toast.makeText(getActivity(), newObj.getLocation(), Toast.LENGTH_SHORT).show();
+            list.add(newObj.getTitle());
         }
 
 

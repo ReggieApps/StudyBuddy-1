@@ -17,6 +17,7 @@ import com.example.adriangracia.studybuddy.MainActivity;
 import com.example.adriangracia.studybuddy.R;
 import com.example.adriangracia.studybuddy.dialogs.ChooseDurationDialogFragment;
 import com.example.adriangracia.studybuddy.dialogs.TimePickerDialogFragment;
+import com.example.adriangracia.studybuddy.objects.EventObject;
 import com.example.adriangracia.studybuddy.objects.TimeObject;
 
 /**
@@ -36,6 +37,7 @@ public class createEventFragment extends Fragment implements View.OnClickListene
     private static final String EXTRA_TITLE = "_EXTRA_TITLE_";
     private static final String EXTRA_PLACE = "_EXTRA_PLACE_";
 
+    private EventObject evenObj;
 
     private Button pickTime;
     private Button chooseDuration;
@@ -72,9 +74,7 @@ public class createEventFragment extends Fragment implements View.OnClickListene
                 else{
                     Intent i = new Intent(getActivity(), MainActivity.class);
 
-                    i.putExtra("TITLE", title.getText().toString());
-                    i.putExtra("PLACE", place.getText().toString());
-                    i.putExtra("TIME_OBJ", to);
+                    i.putExtra("EVENT", evenObj);
                     startActivity(i);
 
                 }
@@ -91,6 +91,10 @@ public class createEventFragment extends Fragment implements View.OnClickListene
 
         place = (EditText)v.findViewById(R.id.edit_text_create_event_place);
 
+        description = (EditText)v.findViewById(R.id.edit_text_create_event_description);
+
+        evenObj = new EventObject(title.getText().toString(), place.getText().toString(), description.getText().toString(), to);
+
         pickTime = (Button)v.findViewById(R.id.button_create_pick_time);
         pickTime.setOnClickListener(this);
 
@@ -99,10 +103,6 @@ public class createEventFragment extends Fragment implements View.OnClickListene
 
         createEvent = (Button) v.findViewById(R.id.create_event_finalize);
         createEvent.setOnClickListener(this);
-
-
-
-        description = (EditText)v.findViewById(R.id.edit_text_create_event_description);
 
         dealWithSavedState(savedInstanceState);
 
