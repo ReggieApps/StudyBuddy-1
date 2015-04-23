@@ -32,9 +32,6 @@ public class mainActivityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_main, container, false);
 
-//        if(eventList==null) eventList = new ArrayList<>();
-//
-//        list = new ArrayList();
         if(getActivity().getIntent().getSerializableExtra("EVENT")!=null) {
             EventObject newObj = (EventObject) getActivity().getIntent().getSerializableExtra("EVENT");
             eventList.add(newObj);
