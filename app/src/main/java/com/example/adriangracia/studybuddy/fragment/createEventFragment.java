@@ -72,9 +72,13 @@ public class createEventFragment extends Fragment implements View.OnClickListene
                 else if(place.getText().length()==0) Toast.makeText(getActivity(),"Please specify a location.", Toast.LENGTH_LONG).show();
                 else if(to==null) Toast.makeText(getActivity(),"Please specify a time.", Toast.LENGTH_LONG).show();
                 else{
+
+                    evenObj = new EventObject(title.getText().toString(), place.getText().toString(), description.getText().toString());
                     Intent i = new Intent(getActivity(), MainActivity.class);
 
-                    i.putExtra("EVENT", evenObj);
+                    Bundle evenBun = new Bundle();
+                    evenBun.putSerializable("EVENT", evenObj);
+                    i.putExtras(evenBun);
                     startActivity(i);
 
                 }
@@ -92,8 +96,6 @@ public class createEventFragment extends Fragment implements View.OnClickListene
         place = (EditText)v.findViewById(R.id.edit_text_create_event_place);
 
         description = (EditText)v.findViewById(R.id.edit_text_create_event_description);
-
-        evenObj = new EventObject(title.getText().toString(), place.getText().toString(), description.getText().toString());
 
         pickTime = (Button)v.findViewById(R.id.button_create_pick_time);
         pickTime.setOnClickListener(this);

@@ -11,12 +11,13 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.adriangracia.studybuddy.AttendInformation;
 import com.example.adriangracia.studybuddy.R;
 import com.example.adriangracia.studybuddy.createEvent;
+import com.example.adriangracia.studybuddy.objects.EventObject;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -29,12 +30,11 @@ public class mainActivityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_main, container, false);
 
-        Bundle extras = getActivity().getIntent().getExtras();
         ArrayList<String> list = new ArrayList();
-        if(extras!=null) {
-            Serializable newObj = extras.getSerializable("EVENT");
-//            Toast.makeText(getActivity(), newObj.getLocation(), Toast.LENGTH_SHORT).show();
-//            list.add(newObj.getTitle());
+        if(getActivity().getIntent().getSerializableExtra("EVENT")!=null) {
+            EventObject newObj = (EventObject) getActivity().getIntent().getSerializableExtra("EVENT");
+            Toast.makeText(getActivity(), newObj.getLocation(), Toast.LENGTH_SHORT).show();
+            list.add(newObj.getTitle());
         }
 
 
