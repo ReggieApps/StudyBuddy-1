@@ -11,7 +11,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.adriangracia.studybuddy.AttendInformation;
 import com.example.adriangracia.studybuddy.R;
@@ -26,15 +25,20 @@ import java.util.ArrayList;
 public class mainActivityFragment extends Fragment {
 
     final public String information = "information";
+    private ArrayList<String> list = new ArrayList<>();
+    private ArrayList<EventObject> eventList = new ArrayList<>();
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_main, container, false);
 
-        ArrayList<String> list = new ArrayList();
+//        if(eventList==null) eventList = new ArrayList<>();
+//
+//        list = new ArrayList();
         if(getActivity().getIntent().getSerializableExtra("EVENT")!=null) {
             EventObject newObj = (EventObject) getActivity().getIntent().getSerializableExtra("EVENT");
-            Toast.makeText(getActivity(), newObj.getTo().toString(), Toast.LENGTH_SHORT).show();
-            list.add(newObj.getTitle());
+            eventList.add(newObj);
+            list.add(eventList.get(eventList.indexOf(newObj)).getTitle());
         }
 
 
@@ -49,7 +53,9 @@ public class mainActivityFragment extends Fragment {
             public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
                 Intent in = new Intent(getActivity(), AttendInformation.class);
 
-                String[] testInformation = {"This", "Is", "Also", "a", "test"};
+                EventObject clickedEvent = eventList.get(position);
+
+                String[] testInformation = {clickedEvent.getTo().toString(), clickedEvent.getLocation(), clickedEvent.getTitle(), "nothing yet", clickedEvent.getDescription()};
                 in.putExtra(information ,testInformation);
                 startActivity(in);
             }

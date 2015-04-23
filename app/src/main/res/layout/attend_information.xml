@@ -9,7 +9,7 @@
     tools:context=".AttendInformation">
 
     <TextView
-        android:text="@string/title"
+        android:text=""
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/title"
@@ -49,14 +49,6 @@
         android:textSize="25sp"
         android:textStyle="bold" />
 
-    <TextView
-        android:text="@string/group_size"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/group_size"
-        android:layout_below="@id/place"
-        android:textSize="25sp"
-        android:textStyle="bold" />
 
     <TextView
         android:text="@string/people_attending"
@@ -66,7 +58,7 @@
         android:textSize="25sp"
         android:clickable="false"
         android:textStyle="bold"
-        android:layout_below="@id/group_size"
+        android:layout_below="@id/place"
         android:layout_alignParentStart="true" />
 
     <TextView
@@ -92,14 +84,6 @@
         android:id="@+id/editPlace"
         android:layout_alignBaseline="@id/place"
         android:layout_toEndOf="@id/place"
-        android:textSize="15sp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/editGroup_size"
-        android:layout_alignBaseline="@id/group_size"
-        android:layout_toEndOf="@id/group_size"
         android:textSize="15sp" />
 
     <TextView
