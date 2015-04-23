@@ -31,7 +31,7 @@ public class createEventFragment extends Fragment implements View.OnClickListene
 
     private static final String EXTRA_TIME_OBJECT = "EXTRA_TIME_OBJ_";
     private static final String EXTRA_DURATION = "_EXTRA_DUR_";
-    private static final String EXTRA_DESCRIPTION = "_EXTRA_DESCRIPT_";
+    private static final String EXTRA_DESCRIPTION = "_EXTRA_DESCRIP_";
     private static final String EXTRA_TITLE = "_EXTRA_TITLE_";
     private static final String EXTRA_PLACE = "_EXTRA_PLACE_";
 
