@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 import com.example.adriangracia.studybuddy.AttendInformation;
 import com.example.adriangracia.studybuddy.R;
@@ -25,6 +26,9 @@ import java.util.ArrayList;
 public class mainActivityFragment extends Fragment {
 
     final public String information = "information";
+
+    public Spinner specifySubject;
+
     private ArrayList<String> list = new ArrayList<>();
     private ArrayList<EventObject> eventList = new ArrayList<>();
 
@@ -68,6 +72,8 @@ public class mainActivityFragment extends Fragment {
             startActivity(in);
         }});
 
+
+        specifySubject = (Spinner) v.findViewById(R.id.spinner);
 
 
        return v;

@@ -139,7 +139,7 @@
                 android:layout_margin="12dp"
                 android:textStyle="bold"
                 android:layout_gravity="center"
-                android:gravity="center"
+                android:gravity="start"
                 android:textSize="18sp"
                 android:text="Subject:"
                 android:layout_width="0dp"
@@ -149,8 +149,9 @@
             <Spinner
                 android:id="@+id/spinner_2"
                 android:layout_weight="1"
+                android:gravity="start"
                 android:entries="@array/class_array"
-                android:layout_width="0dp"
+                android:layout_width="105dp"
                 android:layout_height="match_parent">
             </Spinner>
 

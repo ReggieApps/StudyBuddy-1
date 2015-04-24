@@ -6,6 +6,7 @@
     <string name="prompt">Pick a class</string>
 
     <string-array name="class_array">
+        <item>(nothing selected)</item>
         <item>Math</item>
         <item>English</item>
         <item>Science</item>
