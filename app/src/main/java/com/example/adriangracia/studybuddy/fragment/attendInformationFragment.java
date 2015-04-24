@@ -35,9 +35,8 @@ public class attendInformationFragment extends Fragment {
             placeAppend.append("  " + value[1]);
             titleAppend.append("  " + value[2]);
             durationAppend.append("  " + value[3]);
-            subjectAppend.append(" " + value[5]);
             descriptionAppend.append("  " + value[4]);
-
+            subjectAppend.append(" " + value[5]);
 
 
         }

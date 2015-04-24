@@ -64,7 +64,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="subject"
+        android:text="Subject:"
         android:id="@+id/subject"
         android:layout_below="@id/duration"
         android:textSize="25sp"

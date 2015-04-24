@@ -212,6 +212,5 @@ public class createEventFragment extends Fragment implements View.OnClickListene
         if(place!=null){
             outState.putString(EXTRA_PLACE,place.getText().toString());
         }
-
     }
 }
