@@ -14,7 +14,7 @@ public class EventObject implements Serializable{
     int duration;
     TimeObject to;
 
-    public EventObject(String title, String location, String description, String subject, int duration, TimeObject to){
+    public EventObject(String title, String location, TimeObject to){
         this.title=title;
         this.location=location;
         this.description=description;
