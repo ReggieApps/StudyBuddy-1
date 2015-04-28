@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by jonathanmitchell on 4/20/15.
  */
-public class TimeObject implements Serializable{
+public class TimeObject implements Serializable,Comparable<TimeObject>{
 
     private int hour;
     private int minute;
@@ -87,5 +87,11 @@ public class TimeObject implements Serializable{
 
 
         return hourNonMil+":"+minDigits+" "+amOrPm;
+    }
+
+    //implement later, so we can sort lists
+    @Override
+    public int compareTo(TimeObject timeObject) {
+        return 0;
     }
 }

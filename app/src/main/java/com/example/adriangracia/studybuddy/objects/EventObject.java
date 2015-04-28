@@ -5,8 +5,9 @@ import java.io.Serializable;
 /**
  * Created by idk on 4/22/2015.
  */
-public class EventObject implements Serializable{
+public class EventObject implements Serializable,Comparable<EventObject>{
 
+    private String eventId;
     private String title;
     private String location;
     private TimeObject to;
@@ -42,4 +43,10 @@ public class EventObject implements Serializable{
     }
 
 
+    //implement later, so we can sort lists
+    @Override
+    public int compareTo(EventObject eventObject) {
+
+        return 0;
+    }
 }
