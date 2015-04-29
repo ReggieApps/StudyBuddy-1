@@ -11,12 +11,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.adriangracia.studybuddy.MainActivity;
 import com.example.adriangracia.studybuddy.R;
 import com.example.adriangracia.studybuddy.dialogs.ChooseDurationDialogFragment;
 import com.example.adriangracia.studybuddy.dialogs.TimePickerDialogFragment;
+import com.example.adriangracia.studybuddy.objects.EventObject;
 import com.example.adriangracia.studybuddy.objects.TimeObject;
 
 /**
@@ -36,10 +38,13 @@ public class createEventFragment extends Fragment implements View.OnClickListene
     private static final String EXTRA_TITLE = "_EXTRA_TITLE_";
     private static final String EXTRA_PLACE = "_EXTRA_PLACE_";
 
+    private EventObject evenObj;
 
     private Button pickTime;
     private Button chooseDuration;
     private Button createEvent;
+
+    private Spinner subjectSpinner;
 
     private EditText title;
     private EditText place;
@@ -69,12 +74,15 @@ public class createEventFragment extends Fragment implements View.OnClickListene
                 if(title.getText().length()==0) Toast.makeText(getActivity(),"Please enter a title.", Toast.LENGTH_LONG).show();
                 else if(place.getText().length()==0) Toast.makeText(getActivity(),"Please specify a location.", Toast.LENGTH_LONG).show();
                 else if(to==null) Toast.makeText(getActivity(),"Please specify a time.", Toast.LENGTH_LONG).show();
+                else if(duration==-1) Toast.makeText(getActivity(),"Please specify a duration.", Toast.LENGTH_LONG).show();
                 else{
+
+                    evenObj = new EventObject(title.getText().toString(), place.getText().toString(), description.getText().toString(), subjectSpinner.getSelectedItem().toString(), duration, to);
                     Intent i = new Intent(getActivity(), MainActivity.class);
 
-                    i.putExtra("TITLE", title.getText().toString());
-                    i.putExtra("PLACE", place.getText().toString());
-                    i.putExtra("TIME_OBJ", to);
+                    Bundle evenBun = new Bundle();
+                    evenBun.putSerializable("EVENT", evenObj);
+                    i.putExtras(evenBun);
                     startActivity(i);
 
                 }
@@ -91,6 +99,8 @@ public class createEventFragment extends Fragment implements View.OnClickListene
 
         place = (EditText)v.findViewById(R.id.edit_text_create_event_place);
 
+        description = (EditText)v.findViewById(R.id.edit_text_create_event_description);
+
         pickTime = (Button)v.findViewById(R.id.button_create_pick_time);
         pickTime.setOnClickListener(this);
 
@@ -100,9 +110,7 @@ public class createEventFragment extends Fragment implements View.OnClickListene
         createEvent = (Button) v.findViewById(R.id.create_event_finalize);
         createEvent.setOnClickListener(this);
 
-
-
-        description = (EditText)v.findViewById(R.id.edit_text_create_event_description);
+        subjectSpinner = (Spinner) v.findViewById(R.id.spinner_2);
 
         dealWithSavedState(savedInstanceState);
 
@@ -204,6 +212,5 @@ public class createEventFragment extends Fragment implements View.OnClickListene
         if(place!=null){
             outState.putString(EXTRA_PLACE,place.getText().toString());
         }
-
     }
 }

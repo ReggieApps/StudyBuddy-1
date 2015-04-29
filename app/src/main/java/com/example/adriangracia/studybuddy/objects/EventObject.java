@@ -7,14 +7,19 @@ import java.io.Serializable;
  */
 public class EventObject implements Serializable,Comparable<EventObject>{
 
-    private String eventId;
-    private String title;
-    private String location;
-    private TimeObject to;
+    String title;
+    String location;
+    String description;
+    String subject;
+    int duration;
+    TimeObject to;
 
-    public EventObject(String title, String location, TimeObject to){
+    public EventObject(String title, String location,String description, String subject, int duration, TimeObject to){
         this.title=title;
         this.location=location;
+        this.description=description;
+        this.subject=subject;
+        this.duration=duration;
         this.to=to;
     }
 
@@ -34,6 +39,15 @@ public class EventObject implements Serializable,Comparable<EventObject>{
         this.location = location;
     }
 
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public TimeObject getTo() {
         return to;
     }
@@ -42,7 +56,27 @@ public class EventObject implements Serializable,Comparable<EventObject>{
         this.to = to;
     }
 
+    public String getSubject() {
+        return subject;
+    }
 
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
+    public String getDurationString(){
+        String str ="";
+        str+=duration + " hours";
+        return str;
+    }
     //implement later, so we can sort lists
     @Override
     public int compareTo(EventObject eventObject) {
