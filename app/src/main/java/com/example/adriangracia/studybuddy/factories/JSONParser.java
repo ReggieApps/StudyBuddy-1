@@ -78,13 +78,17 @@ public class JSONParser{
             StringBuilder sb = new StringBuilder();
             String line = null;
             while ((line = reader.readLine()) != null) {
+                Log.i("Current line", line);
                 sb.append(line + "\n");
             }
             is.close();
             json = sb.toString();
+
         } catch (Exception e) {
             Log.e("Buffer Error", "Error converting result " + e.toString());
         }
+
+        Log.i("json string", "current string: " + json);
 
         // try parse the string to a JSON object
         try {
@@ -139,6 +143,8 @@ public class JSONParser{
             is.close();
             // Convert the string builder data to an actual string.
             json = sb.toString();
+
+
         } catch (Exception e) {
             Log.e("Buffer Error", "Error converting result " + e.toString());
         }
@@ -147,6 +153,7 @@ public class JSONParser{
         try {
             jObj = new JSONObject(json);
         } catch (JSONException e) {
+
             Log.e("JSON Parser", "Error parsing data " + e.toString());
         }
 

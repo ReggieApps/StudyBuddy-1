@@ -247,7 +247,7 @@ public class createEventFragment extends Fragment implements View.OnClickListene
         protected void onPreExecute() {
             super.onPreExecute();
             pDialog = new ProgressDialog(getActivity());
-            pDialog.setMessage("Registering New User..");
+            pDialog.setMessage("Creating Event...");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(true);
             pDialog.show();
@@ -272,6 +272,8 @@ public class createEventFragment extends Fragment implements View.OnClickListene
             params.add(new BasicNameValuePair("subject", subj));
             params.add(new BasicNameValuePair("time", time));
 
+            Log.i("What's in params", params.toString());
+
             // getting JSON Object
             // Note that create product url accepts POST method
             JSONObject json = jsonParser.makeHttpRequest(url_new_event,
@@ -293,7 +295,7 @@ public class createEventFragment extends Fragment implements View.OnClickListene
                     getActivity().finish();
                 } else {
                     // failed to create user
-                    Log.d("failed to create user", json.toString());
+                    Log.d("failed to create event.", json.toString());
 
                 }
             } catch (JSONException e) {
