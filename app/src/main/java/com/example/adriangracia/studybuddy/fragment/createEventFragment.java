@@ -1,7 +1,9 @@
 package com.example.adriangracia.studybuddy.fragment;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -18,8 +20,17 @@ import com.example.adriangracia.studybuddy.MainActivity;
 import com.example.adriangracia.studybuddy.R;
 import com.example.adriangracia.studybuddy.dialogs.ChooseDurationDialogFragment;
 import com.example.adriangracia.studybuddy.dialogs.TimePickerDialogFragment;
+import com.example.adriangracia.studybuddy.factories.JSONParser;
 import com.example.adriangracia.studybuddy.objects.EventObject;
 import com.example.adriangracia.studybuddy.objects.TimeObject;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by rgpaul on 4/20/2015.
@@ -46,13 +57,23 @@ public class createEventFragment extends Fragment implements View.OnClickListene
 
     private Spinner subjectSpinner;
 
-    private EditText title;
+    private EditText eTitle;
     private EditText place;
     private EditText description;
 
     private int duration = -1;
 
     private TimeObject to;
+
+    private ProgressDialog pDialog;
+
+    JSONParser jsonParser = new JSONParser();
+
+    // url to create new product
+    private static String url_new_event = "http://138.87.238.48/new_event.php";
+
+    // JSON Node names
+    private static final String TAG_SUCCESS = "success";
 
     @Override
     public void onClick(View view) {
@@ -71,19 +92,19 @@ public class createEventFragment extends Fragment implements View.OnClickListene
                 dur.show(getActivity().getSupportFragmentManager(),TAG);
                 break;
             case R.id.create_event_finalize:
-                if(title.getText().length()==0) Toast.makeText(getActivity(),"Please enter a title.", Toast.LENGTH_LONG).show();
+                if(eTitle.getText().length()==0) Toast.makeText(getActivity(),"Please enter a title.", Toast.LENGTH_LONG).show();
                 else if(place.getText().length()==0) Toast.makeText(getActivity(),"Please specify a location.", Toast.LENGTH_LONG).show();
                 else if(to==null) Toast.makeText(getActivity(),"Please specify a time.", Toast.LENGTH_LONG).show();
                 else if(duration==-1) Toast.makeText(getActivity(),"Please specify a duration.", Toast.LENGTH_LONG).show();
                 else{
-
-                    evenObj = new EventObject(title.getText().toString(), place.getText().toString(), description.getText().toString(), subjectSpinner.getSelectedItem().toString(), duration, to);
-                    Intent i = new Intent(getActivity(), MainActivity.class);
-
-                    Bundle evenBun = new Bundle();
-                    evenBun.putSerializable("EVENT", evenObj);
-                    i.putExtras(evenBun);
-                    startActivity(i);
+                    new CreateNewProduct().execute();
+//                    evenObj = new EventObject(title.getText().toString(), place.getText().toString(), description.getText().toString(), subjectSpinner.getSelectedItem().toString(), duration, to);
+//                    Intent i = new Intent(getActivity(), MainActivity.class);
+//
+//                    Bundle evenBun = new Bundle();
+//                    evenBun.putSerializable("EVENT", evenObj);
+//                    i.putExtras(evenBun);
+//                    startActivity(i);
 
                 }
                 break;
@@ -95,7 +116,7 @@ public class createEventFragment extends Fragment implements View.OnClickListene
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_create_event, container, false);
 
-        title = (EditText)v.findViewById(R.id.edit_text_create_event_title);
+        eTitle = (EditText)v.findViewById(R.id.edit_text_create_event_title);
 
         place = (EditText)v.findViewById(R.id.edit_text_create_event_place);
 
@@ -138,8 +159,8 @@ public class createEventFragment extends Fragment implements View.OnClickListene
             }
 
             String titleString = savedInstanceState.getString(EXTRA_TITLE);
-            if(titleString!=null && !titleString.isEmpty() && title!=null){
-                title.setText(titleString);
+            if(titleString!=null && !titleString.isEmpty() && eTitle!=null){
+                eTitle.setText(titleString);
             }
 
             String placeString = savedInstanceState.getString(EXTRA_PLACE);
@@ -205,12 +226,90 @@ public class createEventFragment extends Fragment implements View.OnClickListene
             outState.putString(EXTRA_DESCRIPTION,description.getText().toString());
         }
 
-        if(title!=null){
-            outState.putString(EXTRA_TITLE,title.getText().toString());
+        if(eTitle!=null){
+            outState.putString(EXTRA_TITLE,eTitle.getText().toString());
         }
 
         if(place!=null){
             outState.putString(EXTRA_PLACE,place.getText().toString());
         }
+    }
+
+    /**
+     * Background Async Task to Create new product
+     * */
+    class CreateNewProduct extends AsyncTask<String, String, String> {
+
+        /**
+         * Before starting background thread Show Progress Dialog
+         * */
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(getActivity());
+            pDialog.setMessage("Registering New User..");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.show();
+        }
+
+        /**
+         * Creating product
+         * */
+        protected String doInBackground(String... args) {
+            String title = eTitle.getText().toString();
+            String location = place.getText().toString();
+            String desc = description.getText().toString();
+            String subj = subjectSpinner.getSelectedItem().toString();
+            String time = to.toString();
+
+
+            // Building Parameters
+            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            params.add(new BasicNameValuePair("title", title));
+            params.add(new BasicNameValuePair("location", location));
+            params.add(new BasicNameValuePair("description", desc));
+            params.add(new BasicNameValuePair("subject", subj));
+            params.add(new BasicNameValuePair("time", time));
+
+            // getting JSON Object
+            // Note that create product url accepts POST method
+            JSONObject json = jsonParser.makeHttpRequest(url_new_event,
+                    "POST", params);
+
+            // check log cat from response
+            Log.d("Create Response", json.toString());
+
+            // check for success tag
+            try {
+                int success = json.getInt(TAG_SUCCESS);
+
+                if (success == 1) {
+                    // successfully created a user
+                    Intent i = new Intent(getActivity(), mainActivityFragment.class);
+                    startActivity(i);
+
+                    // closing this screen
+                    getActivity().finish();
+                } else {
+                    // failed to create user
+                    Log.d("failed to create user", json.toString());
+
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        /**
+         * After completing background task Dismiss the progress dialog
+         * **/
+        protected void onPostExecute(String file_url) {
+            // dismiss the dialog once done
+            pDialog.dismiss();
+        }
+
     }
 }
