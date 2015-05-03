@@ -279,16 +279,17 @@ public class createEventFragment extends Fragment implements View.OnClickListene
             JSONObject json = jsonParser.makeHttpRequest(url_new_event,
                     "POST", params);
 
+
             // check log cat from response
             Log.d("Create Response", json.toString());
 
             // check for success tag
-            try {
-                int success = json.getInt(TAG_SUCCESS);
+           // try {
+                boolean success = json.toString().contains("1");
 
-                if (success == 1) {
-                    // successfully created a user
-                    Intent i = new Intent(getActivity(), mainActivityFragment.class);
+                if (success) {
+                    // successfully created an event
+                    Intent i = new Intent(getActivity(), MainActivity.class);
                     startActivity(i);
 
                     // closing this screen
@@ -298,9 +299,9 @@ public class createEventFragment extends Fragment implements View.OnClickListene
                     Log.d("failed to create event.", json.toString());
 
                 }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
 
             return null;
         }
