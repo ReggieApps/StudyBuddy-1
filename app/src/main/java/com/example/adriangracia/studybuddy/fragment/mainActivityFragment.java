@@ -16,6 +16,7 @@ import android.widget.Spinner;
 import com.example.adriangracia.studybuddy.AttendInformation;
 import com.example.adriangracia.studybuddy.R;
 import com.example.adriangracia.studybuddy.createEvent;
+import com.example.adriangracia.studybuddy.factories.JSONParser;
 import com.example.adriangracia.studybuddy.objects.EventObject;
 
 import java.util.ArrayList;
@@ -32,9 +33,19 @@ public class mainActivityFragment extends Fragment {
     private ArrayList<String> list = new ArrayList<>();
     private ArrayList<EventObject> eventList = new ArrayList<>();
 
+    JSONParser jsonParser = new JSONParser();
+
+    // url to create new product
+    private static String url_new_event = "http://138.87.238.48/new_event.php";
+
+    // JSON Node names
+    private static final String TAG_SUCCESS = "success";
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_main, container, false);
+
+
 
         if(getActivity().getIntent().getSerializableExtra("EVENT")!=null) {
             EventObject newObj = (EventObject) getActivity().getIntent().getSerializableExtra("EVENT");
