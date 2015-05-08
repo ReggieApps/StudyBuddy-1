@@ -42,6 +42,9 @@ public class mainActivityFragment extends Fragment {
 
     JSONParser jsonParser = new JSONParser();
 
+    ListView test;
+    ArrayAdapter adapter;
+
     // url to create new product
     private static String url_get_event = "http://isumobileclub.ilstu.edu/get_events.php";
 
@@ -49,13 +52,12 @@ public class mainActivityFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        new CreateNewProduct().execute();
+
         View v = inflater.inflate(R.layout.activity_main, container, false);
-        final ArrayAdapter adapter = new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1, list);
-        ListView test = (ListView) v.findViewById(R.id.listView);
-        test.setAdapter(adapter);
+        adapter = new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1, list);
+        test = (ListView) v.findViewById(R.id.listView);
 
-
+        new CreateNewProduct().execute();
         test.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
@@ -117,6 +119,7 @@ public class mainActivityFragment extends Fragment {
                     EventObject tempEven = new EventObject(object.getString("title"), object.getString("location"), object.getString("description"), object.getString("subject"), 0, new TimeObject(Integer.parseInt(time[0]), Integer.parseInt(time[1])));
                     eventList.add(tempEven);
                     list.add(object.getString("title"));
+
                     }
 
                 } catch (JSONException e) {
@@ -129,6 +132,7 @@ public class mainActivityFragment extends Fragment {
 
         protected void onPostExecute(String file_url) {
             // dismiss the dialog once done
+            test.setAdapter(adapter);
             pDialog.dismiss();
         }
 
