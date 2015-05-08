@@ -15,10 +15,12 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 
+import com.example.adriangracia.studybuddy.AttendInformation;
 import com.example.adriangracia.studybuddy.R;
 import com.example.adriangracia.studybuddy.createEvent;
 import com.example.adriangracia.studybuddy.factories.JSONParser;
 import com.example.adriangracia.studybuddy.objects.EventObject;
+import com.example.adriangracia.studybuddy.objects.TimeObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,9 +49,9 @@ public class mainActivityFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        new CreateNewProduct().execute();
         View v = inflater.inflate(R.layout.activity_main, container, false);
         final ArrayAdapter adapter = new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1, list);
-        new CreateNewProduct().execute();
         ListView test = (ListView) v.findViewById(R.id.listView);
         test.setAdapter(adapter);
 
@@ -57,7 +59,13 @@ public class mainActivityFragment extends Fragment {
         test.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
+                Intent in = new Intent(getActivity(), AttendInformation.class);
 
+                EventObject clickedEvent = eventList.get(position);
+
+                String[] testInformation = {clickedEvent.getTo().toString(), clickedEvent.getLocation(), clickedEvent.getTitle(),clickedEvent.getDurationString(), clickedEvent.getDescription(), clickedEvent.getSubject()};
+                in.putExtra(information ,testInformation);
+                startActivity(in);
             }
         });
 
@@ -71,6 +79,12 @@ public class mainActivityFragment extends Fragment {
             startActivity(in);
         }});
 
+        Button refresh = (Button) v.findViewById(R.id.leftButton);
+        refresh.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                new CreateNewProduct().execute();
+            }});
+
 
         specifySubject = (Spinner) v.findViewById(R.id.spinner);
 
@@ -79,7 +93,6 @@ public class mainActivityFragment extends Fragment {
     }
 
     class CreateNewProduct extends AsyncTask<String, String, String> {
-
 
         @Override
         protected void onPreExecute() {
@@ -91,7 +104,6 @@ public class mainActivityFragment extends Fragment {
             pDialog.show();
         }
 
-
         protected String doInBackground(String... args) {
 
             JSONArray jsonArr = jsonParser.getJSONFromUrl(url_get_event);
@@ -99,7 +111,14 @@ public class mainActivityFragment extends Fragment {
             {
                 try {
                     JSONObject object = jsonArr.getJSONObject(n);
+                    if(!list.contains(object.getString("title"))){
+                    String[] time = object.getString("time").split(":");
+                    time[1] = time[1].substring(0, 2);
+                    EventObject tempEven = new EventObject(object.getString("title"), object.getString("location"), object.getString("description"), object.getString("subject"), 0, new TimeObject(Integer.parseInt(time[0]), Integer.parseInt(time[1])));
+                    eventList.add(tempEven);
                     list.add(object.getString("title"));
+                    }
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -107,7 +126,6 @@ public class mainActivityFragment extends Fragment {
             }
             return null;
         }
-
 
         protected void onPostExecute(String file_url) {
             // dismiss the dialog once done

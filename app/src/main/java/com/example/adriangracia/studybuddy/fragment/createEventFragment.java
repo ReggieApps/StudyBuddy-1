@@ -290,9 +290,6 @@ public class createEventFragment extends Fragment implements View.OnClickListene
                     Log.d("failed to create event.", json.toString());
 
                 }
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
 
             return null;
         }
