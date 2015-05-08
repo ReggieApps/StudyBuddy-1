@@ -1,4 +1,5 @@
 package com.example.adriangracia.studybuddy.factories;
+
 import android.util.Log;
 
 import org.apache.http.HttpEntity;
@@ -10,6 +11,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -24,6 +26,7 @@ public class JSONParser{
 
     static InputStream is = null;
     static JSONObject jObj = null;
+    static JSONArray jArr = null;
     static String json = "";
 
     // constructor
@@ -102,7 +105,7 @@ public class JSONParser{
 
     }
 
-    public JSONObject getJSONFromUrl(final String url) {
+    public JSONArray getJSONFromUrl(final String url) {
 
         // Making HTTP request
         try {
@@ -151,14 +154,14 @@ public class JSONParser{
 
         // Try to parse the string to a JSON object
         try {
-            jObj = new JSONObject(json);
+            jArr = new JSONArray(json);
         } catch (JSONException e) {
 
             Log.e("JSON Parser", "Error parsing data " + e.toString());
         }
 
         // Return the JSON Object.
-        return jObj;
+        return jArr;
 
     }
 }

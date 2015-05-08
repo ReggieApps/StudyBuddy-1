@@ -1,6 +1,8 @@
 package com.example.adriangracia.studybuddy.fragment;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -19,6 +21,10 @@ import com.example.adriangracia.studybuddy.createEvent;
 import com.example.adriangracia.studybuddy.factories.JSONParser;
 import com.example.adriangracia.studybuddy.objects.EventObject;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 /**
@@ -36,16 +42,17 @@ public class mainActivityFragment extends Fragment {
     JSONParser jsonParser = new JSONParser();
 
     // url to create new product
-    private static String url_new_event = "http://138.87.238.48/new_event.php";
+    private static String url_get_event = "http://isumobileclub.ilstu.edu/get_events.php";
 
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
+    private ProgressDialog pDialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_main, container, false);
 
-
+        new CreateNewProduct().execute();
 
         if(getActivity().getIntent().getSerializableExtra("EVENT")!=null) {
             EventObject newObj = (EventObject) getActivity().getIntent().getSerializableExtra("EVENT");
@@ -88,6 +95,77 @@ public class mainActivityFragment extends Fragment {
 
 
        return v;
+    }
+
+    class CreateNewProduct extends AsyncTask<String, String, String> {
+
+        /**
+         * Before starting background thread Show Progress Dialog
+         * */
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(getActivity());
+            pDialog.setMessage("Creating Event...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.show();
+        }
+
+        /**
+         * Creating product
+         * */
+        protected String doInBackground(String... args) {
+
+            // getting JSON Object
+            // Note that create product url accepts POST method
+            JSONArray jsonArr = jsonParser.getJSONFromUrl(url_get_event);
+            for(int n = 0; n < jsonArr.length(); n++)
+            {
+                try {
+                    JSONObject object = jsonArr.getJSONObject(n);
+                    list.add(object.getString("title"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+            // check log cat from response
+            //Log.d("Create Response", json.toString());
+
+
+           // list.addAll(col);
+            // check for success tag
+            // try {
+//            boolean success = json.toString().contains("1");
+//
+//            if (success) {
+//                // successfully created an event
+//                Intent i = new Intent(getActivity(), MainActivity.class);
+//                startActivity(i);
+//
+//                // closing this screen
+//                getActivity().finish();
+//            } else {
+//                // failed to create user
+//                Log.d("failed to create event.", json.toString());
+//
+//            }
+////            } catch (JSONException e) {
+////                e.printStackTrace();
+////            }
+
+            return null;
+        }
+
+        /**
+         * After completing background task Dismiss the progress dialog
+         * **/
+        protected void onPostExecute(String file_url) {
+            // dismiss the dialog once done
+            pDialog.dismiss();
+        }
+
     }
 }
 

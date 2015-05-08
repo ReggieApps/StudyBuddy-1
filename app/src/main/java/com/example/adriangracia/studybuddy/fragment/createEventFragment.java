@@ -26,7 +26,6 @@ import com.example.adriangracia.studybuddy.objects.TimeObject;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -70,7 +69,7 @@ public class createEventFragment extends Fragment implements View.OnClickListene
     JSONParser jsonParser = new JSONParser();
 
     // url to create new product
-    private static String url_new_event = "http://138.87.238.48/new_event.php";
+    private static String url_new_event = "http://isumobileclub.ilstu.edu/new_event.php";
 
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
