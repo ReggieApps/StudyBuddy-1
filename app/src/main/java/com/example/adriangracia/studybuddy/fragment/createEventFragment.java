@@ -97,14 +97,6 @@ public class createEventFragment extends Fragment implements View.OnClickListene
                 else if(duration==-1) Toast.makeText(getActivity(),"Please specify a duration.", Toast.LENGTH_LONG).show();
                 else{
                     new CreateNewProduct().execute();
-//                    evenObj = new EventObject(title.getText().toString(), place.getText().toString(), description.getText().toString(), subjectSpinner.getSelectedItem().toString(), duration, to);
-//                    Intent i = new Intent(getActivity(), MainActivity.class);
-//
-//                    Bundle evenBun = new Bundle();
-//                    evenBun.putSerializable("EVENT", evenObj);
-//                    i.putExtras(evenBun);
-//                    startActivity(i);
-
                 }
                 break;
             default:

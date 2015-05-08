@@ -15,7 +15,6 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 
-import com.example.adriangracia.studybuddy.AttendInformation;
 import com.example.adriangracia.studybuddy.R;
 import com.example.adriangracia.studybuddy.createEvent;
 import com.example.adriangracia.studybuddy.factories.JSONParser;
@@ -44,25 +43,13 @@ public class mainActivityFragment extends Fragment {
     // url to create new product
     private static String url_get_event = "http://isumobileclub.ilstu.edu/get_events.php";
 
-    // JSON Node names
-    private static final String TAG_SUCCESS = "success";
     private ProgressDialog pDialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_main, container, false);
-
-        new CreateNewProduct().execute();
-
-        if(getActivity().getIntent().getSerializableExtra("EVENT")!=null) {
-            EventObject newObj = (EventObject) getActivity().getIntent().getSerializableExtra("EVENT");
-            eventList.add(newObj);
-            list.add(eventList.get(eventList.indexOf(newObj)).getTitle());
-        }
-
-
         final ArrayAdapter adapter = new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1, list);
-
+        new CreateNewProduct().execute();
         ListView test = (ListView) v.findViewById(R.id.listView);
         test.setAdapter(adapter);
 
@@ -70,13 +57,7 @@ public class mainActivityFragment extends Fragment {
         test.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
-                Intent in = new Intent(getActivity(), AttendInformation.class);
 
-                EventObject clickedEvent = eventList.get(position);
-
-                String[] testInformation = {clickedEvent.getTo().toString(), clickedEvent.getLocation(), clickedEvent.getTitle(),clickedEvent.getDurationString(), clickedEvent.getDescription(), clickedEvent.getSubject()};
-                in.putExtra(information ,testInformation);
-                startActivity(in);
             }
         });
 
@@ -99,26 +80,20 @@ public class mainActivityFragment extends Fragment {
 
     class CreateNewProduct extends AsyncTask<String, String, String> {
 
-        /**
-         * Before starting background thread Show Progress Dialog
-         * */
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
             pDialog = new ProgressDialog(getActivity());
-            pDialog.setMessage("Creating Event...");
+            pDialog.setMessage("Getting Events...");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(true);
             pDialog.show();
         }
 
-        /**
-         * Creating product
-         * */
+
         protected String doInBackground(String... args) {
 
-            // getting JSON Object
-            // Note that create product url accepts POST method
             JSONArray jsonArr = jsonParser.getJSONFromUrl(url_get_event);
             for(int n = 0; n < jsonArr.length(); n++)
             {
@@ -130,37 +105,10 @@ public class mainActivityFragment extends Fragment {
                 }
 
             }
-            // check log cat from response
-            //Log.d("Create Response", json.toString());
-
-
-           // list.addAll(col);
-            // check for success tag
-            // try {
-//            boolean success = json.toString().contains("1");
-//
-//            if (success) {
-//                // successfully created an event
-//                Intent i = new Intent(getActivity(), MainActivity.class);
-//                startActivity(i);
-//
-//                // closing this screen
-//                getActivity().finish();
-//            } else {
-//                // failed to create user
-//                Log.d("failed to create event.", json.toString());
-//
-//            }
-////            } catch (JSONException e) {
-////                e.printStackTrace();
-////            }
-
             return null;
         }
 
-        /**
-         * After completing background task Dismiss the progress dialog
-         * **/
+
         protected void onPostExecute(String file_url) {
             // dismiss the dialog once done
             pDialog.dismiss();

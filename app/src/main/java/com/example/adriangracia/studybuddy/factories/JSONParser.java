@@ -152,7 +152,7 @@ public class JSONParser{
             Log.e("Buffer Error", "Error converting result " + e.toString());
         }
 
-        // Try to parse the string to a JSON object
+        // Try to parse the string to a JSON Array
         try {
             jArr = new JSONArray(json);
         } catch (JSONException e) {
