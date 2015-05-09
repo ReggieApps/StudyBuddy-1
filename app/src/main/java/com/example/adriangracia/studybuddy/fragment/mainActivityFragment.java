@@ -114,7 +114,6 @@ public class mainActivityFragment extends Fragment {
 
                 } else {
                     String selectedSubj = getResources().getStringArray(R.array.class_array)[position];
-                    Toast.makeText(getActivity(), selectedSubj, Toast.LENGTH_SHORT).show();
                     for (int i = 0; i < eventList.size(); i++) {
                         if (!eventList.get(i).getSubject().equals(selectedSubj) && list.contains(eventList.get(i).getTitle())) {
                             list.remove(list.indexOf(eventList.get(i).getTitle()));
