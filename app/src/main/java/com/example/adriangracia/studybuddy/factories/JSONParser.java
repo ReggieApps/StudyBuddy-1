@@ -81,7 +81,6 @@ public class JSONParser{
             StringBuilder sb = new StringBuilder();
             String line = null;
             while ((line = reader.readLine()) != null) {
-                Log.i("Current line", line);
                 sb.append(line + "\n");
             }
             is.close();
@@ -90,8 +89,6 @@ public class JSONParser{
         } catch (Exception e) {
             Log.e("Buffer Error", "Error converting result " + e.toString());
         }
-
-        Log.i("json string", "current string: " + json);
 
         // try parse the string to a JSON object
         try {

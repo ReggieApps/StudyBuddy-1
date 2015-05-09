@@ -1,6 +1,7 @@
 package com.example.adriangracia.studybuddy.fragment;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.adriangracia.studybuddy.AttendInformation;
 import com.example.adriangracia.studybuddy.R;
@@ -65,8 +67,8 @@ public class mainActivityFragment extends Fragment {
 
                 EventObject clickedEvent = eventList.get(position);
 
-                String[] testInformation = {clickedEvent.getTo().toString(), clickedEvent.getLocation(), clickedEvent.getTitle(),clickedEvent.getDurationString(), clickedEvent.getDescription(), clickedEvent.getSubject()};
-                in.putExtra(information ,testInformation);
+                String[] testInformation = {clickedEvent.getTo().toString(), clickedEvent.getLocation(), clickedEvent.getTitle(), clickedEvent.getDurationString(), clickedEvent.getDescription(), clickedEvent.getSubject()};
+                in.putExtra(information, testInformation);
                 startActivity(in);
             }
         });
@@ -76,10 +78,11 @@ public class mainActivityFragment extends Fragment {
         createEventButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-            Intent in = new Intent(getActivity(), createEvent.class);
+                Intent in = new Intent(getActivity(), createEvent.class);
 
-            startActivity(in);
-        }});
+                startActivity(in);
+            }
+        });
 
         Button refresh = (Button) v.findViewById(R.id.leftButton);
         refresh.setOnClickListener(new View.OnClickListener() {
@@ -87,10 +90,22 @@ public class mainActivityFragment extends Fragment {
                 new CreateNewProduct().execute();
             }});
 
-
         specifySubject = (Spinner) v.findViewById(R.id.spinner);
+        specifySubject.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position == 0) {
+                    new CreateNewProduct().execute();
+                } else {
+                    String[] arr = getResources().getStringArray(R.array.class_array);
+                }
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });
        return v;
     }
 
@@ -107,7 +122,6 @@ public class mainActivityFragment extends Fragment {
         }
 
         protected String doInBackground(String... args) {
-
             JSONArray jsonArr = jsonParser.getJSONFromUrl(url_get_event);
             for(int n = 0; n < jsonArr.length(); n++)
             {

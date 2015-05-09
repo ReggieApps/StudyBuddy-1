@@ -263,7 +263,6 @@ public class createEventFragment extends Fragment implements View.OnClickListene
             params.add(new BasicNameValuePair("subject", subj));
             params.add(new BasicNameValuePair("time", time));
 
-            Log.i("What's in params", params.toString());
 
             // getting JSON Object
             // Note that create product url accepts POST method
