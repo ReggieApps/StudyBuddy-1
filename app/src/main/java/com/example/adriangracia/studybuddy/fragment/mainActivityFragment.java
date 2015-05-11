@@ -52,7 +52,6 @@ public class mainActivityFragment extends Fragment {
     ListView test;
     ArrayAdapter adapter;
 
-    // url to create new product
     private static String url_get_event = "http://isumobileclub.ilstu.edu/get_events.php";
 
     private ProgressDialog pDialog;
@@ -69,7 +68,7 @@ public class mainActivityFragment extends Fragment {
         task = new CreateNewProduct(this){
             @Override
             public void onResponseReceived() {
-                Toast.makeText(getActivity(), "Shit happened", Toast.LENGTH_SHORT).show();
+
             }
         }.execute();
 
@@ -91,7 +90,6 @@ public class mainActivityFragment extends Fragment {
 
         createEventButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
                 Intent in = new Intent(getActivity(), createEvent.class);
 
                 startActivity(in);
@@ -102,9 +100,7 @@ public class mainActivityFragment extends Fragment {
         specifySubject.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
                     new CreateNewProduct(position){
-
                         @Override
                         public void onResponseReceived() {
                             if (position == 0) {
@@ -122,9 +118,6 @@ public class mainActivityFragment extends Fragment {
                             }
                         }
                     }.execute();
-
-
-
             }
 
             @Override
@@ -201,13 +194,10 @@ public class mainActivityFragment extends Fragment {
                     EventObject tempEven = new EventObject(object.getString("title"), object.getString("location"), object.getString("description"), object.getString("subject"), 0, new TimeObject(Integer.parseInt(time[0]), Integer.parseInt(time[1])));
                     eventList.add(tempEven);
                     list.add(object.getString("title"));
-
                     }
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
             }
             return null;
         }
@@ -215,8 +205,9 @@ public class mainActivityFragment extends Fragment {
         protected void onPostExecute(String file_url) {
             // dismiss the dialog once done
             test.setAdapter(adapter);
-            pDialog.dismiss();
             onResponseReceived();
+            pDialog.dismiss();
+
         }
 
         public abstract void onResponseReceived();
