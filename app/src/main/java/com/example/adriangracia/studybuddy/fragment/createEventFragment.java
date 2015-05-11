@@ -41,14 +41,11 @@ public class createEventFragment extends Fragment implements View.OnClickListene
     public static final int TIME_REQUEST_CODE = 1;
     public static final int DURATION_REQUEST_CODE = 2;
 
-
     private static final String EXTRA_TIME_OBJECT = "EXTRA_TIME_OBJ_";
     private static final String EXTRA_DURATION = "_EXTRA_DUR_";
     private static final String EXTRA_DESCRIPTION = "_EXTRA_DESCRIP_";
     private static final String EXTRA_TITLE = "_EXTRA_TITLE_";
     private static final String EXTRA_PLACE = "_EXTRA_PLACE_";
-
-    private EventObject evenObj;
 
     private Button pickTime;
     private Button chooseDuration;
@@ -70,9 +67,6 @@ public class createEventFragment extends Fragment implements View.OnClickListene
 
     // url to create new product
     private static String url_new_event = "http://isumobileclub.ilstu.edu/new_event.php";
-
-    // JSON Node names
-    private static final String TAG_SUCCESS = "success";
 
     @Override
     public void onClick(View view) {

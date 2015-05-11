@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -55,6 +57,8 @@ public class mainActivityFragment extends Fragment {
 
     private ProgressDialog pDialog;
 
+    AsyncTask task;
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
@@ -62,11 +66,13 @@ public class mainActivityFragment extends Fragment {
         adapter = new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1, list);
         test = (ListView) v.findViewById(R.id.listView);
 
-        new CreateNewProduct().execute();
+        task = new CreateNewProduct(this){
+            @Override
+            public void onResponseReceived(String result) {
 
-        if(pDialog.isShowing()){
-            pDialog.dismiss();
-        }
+            }
+        }.execute();
+
 
         test.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -96,17 +102,13 @@ public class mainActivityFragment extends Fragment {
         specifySubject.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                AsyncTask task;
-                task = new CreateNewProduct().execute();
-                try {
-                    task.get(3000, TimeUnit.MILLISECONDS);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                } catch (TimeoutException e) {
-                    e.printStackTrace();
-                }
+                new CreateNewProduct(view){
+
+                    @Override
+                    public void onResponseReceived(String result) {
+
+                    }
+                }.execute();
 
                 if (position == 0) {
 
@@ -132,17 +134,13 @@ public class mainActivityFragment extends Fragment {
         Button refresh = (Button) v.findViewById(R.id.leftButton);
         refresh.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                AsyncTask task;
-                task = new CreateNewProduct().execute();
-                try {
-                    task.get(3000, TimeUnit.MILLISECONDS);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                } catch (TimeoutException e) {
-                    e.printStackTrace();
-                }
+                new CreateNewProduct(v){
+
+                    @Override
+                    public void onResponseReceived(String result) {
+
+                    }
+                }.execute();
 
                 if (specifySubject.getSelectedItemPosition() == 0) {
 
@@ -163,7 +161,18 @@ public class mainActivityFragment extends Fragment {
        return v;
     }
 
-    class CreateNewProduct extends AsyncTask<String, String, String> {
+    abstract class CreateNewProduct extends AsyncTask<String, String, String> implements Handler.Callback{
+
+        mainActivityFragment caller;
+        View v;
+
+        public CreateNewProduct(mainActivityFragment caller) {
+            this.caller = caller;
+        }
+
+        public CreateNewProduct(View v){
+            this.v = v;
+        }
 
         @Override
         protected void onPreExecute() {
@@ -202,8 +211,15 @@ public class mainActivityFragment extends Fragment {
             // dismiss the dialog once done
             test.setAdapter(adapter);
             pDialog.dismiss();
+            onResponseReceived(file_url);
         }
 
+        public abstract void onResponseReceived(String result);
+
+        @Override
+        public boolean handleMessage(Message msg) {
+            return false;
+        }
     }
 }
 
