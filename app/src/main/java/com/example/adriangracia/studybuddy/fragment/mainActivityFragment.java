@@ -64,6 +64,10 @@ public class mainActivityFragment extends Fragment {
 
         new CreateNewProduct().execute();
 
+        if(pDialog.isShowing()){
+            pDialog.dismiss();
+        }
+
         test.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
@@ -88,20 +92,14 @@ public class mainActivityFragment extends Fragment {
             }
         });
 
-        Button refresh = (Button) v.findViewById(R.id.leftButton);
-        refresh.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                new CreateNewProduct().execute();
-            }});
-
         specifySubject = (Spinner) v.findViewById(R.id.spinner);
         specifySubject.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                AsyncTask task = new CreateNewProduct();
-                task = new CreateNewProduct ().execute();
+                AsyncTask task;
+                task = new CreateNewProduct().execute();
                 try {
-                    task.get(1000, TimeUnit.MILLISECONDS);
+                    task.get(3000, TimeUnit.MILLISECONDS);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (ExecutionException e) {
@@ -115,18 +113,50 @@ public class mainActivityFragment extends Fragment {
                 } else {
                     String selectedSubj = getResources().getStringArray(R.array.class_array)[position];
                     for (int i = 0; i < eventList.size(); i++) {
-                        if (!eventList.get(i).getSubject().equals(selectedSubj) && list.contains(eventList.get(i).getTitle())) {
+                        if (!eventList.get(i).getSubject().equals(selectedSubj)) {
                             list.remove(list.indexOf(eventList.get(i).getTitle()));
                             eventList.remove(i);
+                            i--;
                         }
                     }
                     adapter.notifyDataSetChanged();
-                    }
+                }
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });
+
+        Button refresh = (Button) v.findViewById(R.id.leftButton);
+        refresh.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                AsyncTask task;
+                task = new CreateNewProduct().execute();
+                try {
+                    task.get(3000, TimeUnit.MILLISECONDS);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (TimeoutException e) {
+                    e.printStackTrace();
+                }
+
+                if (specifySubject.getSelectedItemPosition() == 0) {
+
+                } else {
+                    String selectedSubj = getResources().getStringArray(R.array.class_array)[specifySubject.getSelectedItemPosition()];
+                    for (int i = 0; i < eventList.size(); i++) {
+                        if (!eventList.get(i).getSubject().equals(selectedSubj)) {
+                            list.remove(list.indexOf(eventList.get(i).getTitle()));
+                            eventList.remove(i);
+                            i--;
+                        }
+                    }
+                    adapter.notifyDataSetChanged();
+                }
             }
         });
 
