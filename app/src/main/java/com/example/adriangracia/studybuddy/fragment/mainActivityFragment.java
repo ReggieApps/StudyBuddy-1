@@ -68,8 +68,8 @@ public class mainActivityFragment extends Fragment {
 
         task = new CreateNewProduct(this){
             @Override
-            public void onResponseReceived(String result) {
-
+            public void onResponseReceived() {
+                Toast.makeText(getActivity(), "Shit happened", Toast.LENGTH_SHORT).show();
             }
         }.execute();
 
@@ -102,27 +102,29 @@ public class mainActivityFragment extends Fragment {
         specifySubject.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                new CreateNewProduct(view){
 
-                    @Override
-                    public void onResponseReceived(String result) {
+                    new CreateNewProduct(position){
 
-                    }
-                }.execute();
+                        @Override
+                        public void onResponseReceived() {
+                            if (position == 0) {
 
-                if (position == 0) {
-
-                } else {
-                    String selectedSubj = getResources().getStringArray(R.array.class_array)[position];
-                    for (int i = 0; i < eventList.size(); i++) {
-                        if (!eventList.get(i).getSubject().equals(selectedSubj)) {
-                            list.remove(list.indexOf(eventList.get(i).getTitle()));
-                            eventList.remove(i);
-                            i--;
+                            } else {
+                                String selectedSubj = getResources().getStringArray(R.array.class_array)[position];
+                                for (int i = 0; i < eventList.size(); i++) {
+                                    if (!eventList.get(i).getSubject().equals(selectedSubj)) {
+                                        list.remove(list.indexOf(eventList.get(i).getTitle()));
+                                        eventList.remove(i);
+                                        i--;
+                                    }
+                                }
+                                adapter.notifyDataSetChanged();
+                            }
                         }
-                    }
-                    adapter.notifyDataSetChanged();
-                }
+                    }.execute();
+
+
+
             }
 
             @Override
@@ -137,24 +139,22 @@ public class mainActivityFragment extends Fragment {
                 new CreateNewProduct(v){
 
                     @Override
-                    public void onResponseReceived(String result) {
+                    public void onResponseReceived() {
+                        if (specifySubject.getSelectedItemPosition() == 0) {
 
-                    }
-                }.execute();
-
-                if (specifySubject.getSelectedItemPosition() == 0) {
-
-                } else {
-                    String selectedSubj = getResources().getStringArray(R.array.class_array)[specifySubject.getSelectedItemPosition()];
-                    for (int i = 0; i < eventList.size(); i++) {
-                        if (!eventList.get(i).getSubject().equals(selectedSubj)) {
-                            list.remove(list.indexOf(eventList.get(i).getTitle()));
-                            eventList.remove(i);
-                            i--;
+                        } else {
+                            String selectedSubj = getResources().getStringArray(R.array.class_array)[specifySubject.getSelectedItemPosition()];
+                            for (int i = 0; i < eventList.size(); i++) {
+                                if (!eventList.get(i).getSubject().equals(selectedSubj)) {
+                                    list.remove(list.indexOf(eventList.get(i).getTitle()));
+                                    eventList.remove(i);
+                                    i--;
+                                }
+                            }
+                            adapter.notifyDataSetChanged();
                         }
                     }
-                    adapter.notifyDataSetChanged();
-                }
+                }.execute();
             }
         });
 
@@ -165,6 +165,7 @@ public class mainActivityFragment extends Fragment {
 
         mainActivityFragment caller;
         View v;
+        int position;
 
         public CreateNewProduct(mainActivityFragment caller) {
             this.caller = caller;
@@ -172,6 +173,10 @@ public class mainActivityFragment extends Fragment {
 
         public CreateNewProduct(View v){
             this.v = v;
+        }
+
+        public CreateNewProduct(int position){
+            this.position = position;
         }
 
         @Override
@@ -211,10 +216,10 @@ public class mainActivityFragment extends Fragment {
             // dismiss the dialog once done
             test.setAdapter(adapter);
             pDialog.dismiss();
-            onResponseReceived(file_url);
+            onResponseReceived();
         }
 
-        public abstract void onResponseReceived(String result);
+        public abstract void onResponseReceived();
 
         @Override
         public boolean handleMessage(Message msg) {
