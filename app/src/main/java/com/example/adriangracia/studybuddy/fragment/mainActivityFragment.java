@@ -1,7 +1,6 @@
 package com.example.adriangracia.studybuddy.fragment;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -17,11 +16,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
-import com.example.adriangracia.studybuddy.AttendInformation;
+import com.example.adriangracia.studybuddy.activities.AttendInformation;
 import com.example.adriangracia.studybuddy.R;
-import com.example.adriangracia.studybuddy.createEvent;
+import com.example.adriangracia.studybuddy.activities.CreateEvent;
 import com.example.adriangracia.studybuddy.factories.JSONParser;
 import com.example.adriangracia.studybuddy.objects.EventObject;
 import com.example.adriangracia.studybuddy.objects.TimeObject;
@@ -31,14 +29,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 
 /**
  * Created by rgpaul on 4/20/2015.
  */
-public class mainActivityFragment extends Fragment {
+public class MainActivityFragment extends Fragment {
 
     final public String information = "information";
 
@@ -90,13 +85,15 @@ public class mainActivityFragment extends Fragment {
 
         createEventButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent in = new Intent(getActivity(), createEvent.class);
+                Intent in = new Intent(getActivity(), CreateEvent.class);
 
                 startActivity(in);
             }
         });
 
         specifySubject = (Spinner) v.findViewById(R.id.spinner);
+
+        //I think this is the cause of the Async progress not closing on startup sometimes.
         specifySubject.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -156,11 +153,11 @@ public class mainActivityFragment extends Fragment {
 
     abstract class CreateNewProduct extends AsyncTask<String, String, String> implements Handler.Callback{
 
-        mainActivityFragment caller;
+        MainActivityFragment caller;
         View v;
         int position;
 
-        public CreateNewProduct(mainActivityFragment caller) {
+        public CreateNewProduct(MainActivityFragment caller) {
             this.caller = caller;
         }
 

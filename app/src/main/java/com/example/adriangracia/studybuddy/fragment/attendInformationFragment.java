@@ -15,7 +15,7 @@ import com.example.adriangracia.studybuddy.R;
 /**
  * Created by rgpaul on 4/20/2015.
  */
-public class attendInformationFragment extends Fragment {
+public class AttendInformationFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.attend_information, container, false);

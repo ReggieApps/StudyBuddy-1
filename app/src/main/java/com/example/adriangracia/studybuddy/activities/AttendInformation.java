@@ -1,22 +1,15 @@
-package com.example.adriangracia.studybuddy;
+package com.example.adriangracia.studybuddy.activities;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.adriangracia.studybuddy.fragment.attendInformationFragment;
-import com.example.adriangracia.studybuddy.fragment.mainActivityFragment;
+import com.example.adriangracia.studybuddy.R;
+import com.example.adriangracia.studybuddy.fragment.AttendInformationFragment;
+import com.example.adriangracia.studybuddy.SingleFragmentActivity;
 
 
-public class AttendInformation extends singleFragmentActivity {
+public class AttendInformation extends SingleFragmentActivity {
 
 
 
@@ -45,6 +38,6 @@ public class AttendInformation extends singleFragmentActivity {
 
     @Override
     public Fragment getFragment() {
-        return new attendInformationFragment();
+        return new AttendInformationFragment();
     }
 }

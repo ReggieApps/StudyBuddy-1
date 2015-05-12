@@ -7,7 +7,7 @@ import android.support.v7.app.ActionBarActivity;
 /**
  * Created by rgpaul on 4/20/2015.
  */
-public abstract class singleFragmentActivity extends ActionBarActivity {
+public abstract class SingleFragmentActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

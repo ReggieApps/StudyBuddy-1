@@ -16,12 +16,11 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.adriangracia.studybuddy.MainActivity;
+import com.example.adriangracia.studybuddy.activities.MainActivity;
 import com.example.adriangracia.studybuddy.R;
 import com.example.adriangracia.studybuddy.dialogs.ChooseDurationDialogFragment;
 import com.example.adriangracia.studybuddy.dialogs.TimePickerDialogFragment;
 import com.example.adriangracia.studybuddy.factories.JSONParser;
-import com.example.adriangracia.studybuddy.objects.EventObject;
 import com.example.adriangracia.studybuddy.objects.TimeObject;
 
 import org.apache.http.NameValuePair;
@@ -34,7 +33,7 @@ import java.util.List;
 /**
  * Created by rgpaul on 4/20/2015.
  */
-public class createEventFragment extends Fragment implements View.OnClickListener{
+public class CreateEventFragment extends Fragment implements View.OnClickListener{
 
     private static final String TAG = "CreateEventFragment";
 
@@ -76,12 +75,12 @@ public class createEventFragment extends Fragment implements View.OnClickListene
         switch (id){
             case R.id.button_create_pick_time:
                 TimePickerDialogFragment picker = new TimePickerDialogFragment();
-                picker.setTargetFragment(createEventFragment.this,TIME_REQUEST_CODE);
+                picker.setTargetFragment(CreateEventFragment.this,TIME_REQUEST_CODE);
                 picker.show(getActivity().getSupportFragmentManager(),TAG);
                 break;
             case R.id.button_create_pick_duration:
                 ChooseDurationDialogFragment dur = new ChooseDurationDialogFragment();
-                dur.setTargetFragment(createEventFragment.this,DURATION_REQUEST_CODE);
+                dur.setTargetFragment(CreateEventFragment.this,DURATION_REQUEST_CODE);
                 dur.show(getActivity().getSupportFragmentManager(),TAG);
                 break;
             case R.id.create_event_finalize:
