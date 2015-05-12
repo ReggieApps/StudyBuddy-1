@@ -25,6 +25,7 @@
     <string name="duration">Duration:</string>
     <string name="attend_button">Attend</string>
     <string name="attend_page">Attend Page Test</string>
+    <string name="side_bar_text">Login Goes Here</string>
 
 
 </resources>

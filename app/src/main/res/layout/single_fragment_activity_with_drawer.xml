@@ -12,11 +12,11 @@
         android:id="@+id/frame_layout_drawer_content_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        
+
         </FrameLayout>
 
-    <!-- The navigation drawer -->
-    <ListView
+
+    <LinearLayout
         android:layout_margin="6dp"
         android:id="@+id/list_view_left_drawer"
         android:layout_width="280dp"
@@ -24,7 +24,17 @@
         android:layout_gravity="start"
         android:choiceMode="singleChoice"
         android:dividerHeight="1dp"
-        android:background="#A4A4A4"/>
+        android:background="#ffa41b26"
+        android:orientation="horizontal">
+
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="@string/side_bar_text"
+            />
+
+    </LinearLayout>
 
 
 </android.support.v4.widget.DrawerLayout>

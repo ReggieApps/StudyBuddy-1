@@ -3,6 +3,7 @@ package com.example.adriangracia.studybuddy;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.adriangracia.studybuddy.R;
@@ -15,7 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 public abstract class SingleFragmentActivityDrawer extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
-    private ListView listView;
+    private Button button;
 
 
 
@@ -25,7 +26,7 @@ public abstract class SingleFragmentActivityDrawer extends AppCompatActivity {
         setContentView(R.layout.single_fragment_activity_with_drawer);
 
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
-        listView = (ListView)findViewById(R.id.list_view_left_drawer);
+        //button = (Button)findViewById(R.id.list_view_left_drawer);
 
         Fragment aFrag = getSupportFragmentManager().findFragmentById(R.id.frame_layout_drawer_content_frame);
 
@@ -49,8 +50,8 @@ public abstract class SingleFragmentActivityDrawer extends AppCompatActivity {
         return drawerLayout;
     }
 
-    public ListView getDrawerListView(){
-        return listView;
+    public Button getDrawerListView(){
+        return button;
     }
 
 
