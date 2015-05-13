@@ -7,6 +7,12 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.adriangracia.studybuddy.R;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 
 import android.support.v7.app.AppCompatActivity;
 
@@ -16,8 +22,8 @@ import android.support.v7.app.AppCompatActivity;
 public abstract class SingleFragmentActivityDrawer extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
-    private Button button;
-
+    private LoginButton loginButton;
+    private CallbackManager callbackManager;
 
 
     @Override
@@ -26,7 +32,28 @@ public abstract class SingleFragmentActivityDrawer extends AppCompatActivity {
         setContentView(R.layout.single_fragment_activity_with_drawer);
 
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
-        //button = (Button)findViewById(R.id.list_view_left_drawer);
+
+//        loginButton = (LoginButton) findViewById(R.id.login_button);
+//        loginButton.setReadPermissions("user_friends");
+//        // Other app specific specialization
+//
+//        // Callback registration
+//        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+//            @Override
+//            public void onSuccess(LoginResult loginResult) {
+//                // App code
+//            }
+//
+//            @Override
+//            public void onCancel() {
+//                // App code
+//            }
+//
+//            @Override
+//            public void onError(FacebookException exception) {
+//                // App code
+//            }
+//        });
 
         Fragment aFrag = getSupportFragmentManager().findFragmentById(R.id.frame_layout_drawer_content_frame);
 
@@ -50,8 +77,8 @@ public abstract class SingleFragmentActivityDrawer extends AppCompatActivity {
         return drawerLayout;
     }
 
-    public Button getDrawerListView(){
-        return button;
+    public LoginButton getDrawerListView(){
+        return loginButton;
     }
 
 
